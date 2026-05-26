@@ -89,13 +89,11 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer;
 }
 .logo-mark {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: var(--ink);
-  display: grid; place-items: center;
-  color: var(--gold);
-  font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.1rem;
-  font-style: italic;
+  width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
 }
+.logo-mark svg { width: 100%; height: 100%; display: block; }
 .nav-links {
   display: flex; gap: 36px; list-style: none; margin: 0; padding: 0;
 }
@@ -786,7 +784,25 @@ details.faq[open] .faq-icon svg { color: var(--ink); }
 <header class="nav">
   <div class="container nav-inner">
     <a href="#" class="logo" aria-label="Jack's Detailing Co. home">
-      <span class="logo-mark">J</span>
+      <span class="logo-mark" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+          <defs>
+            <linearGradient id="navTile" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1C1917"/>
+              <stop offset="1" stop-color="#0C0A09"/>
+            </linearGradient>
+            <linearGradient id="navGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#EBD08A"/>
+              <stop offset="0.5" stop-color="#C9A24C"/>
+              <stop offset="1" stop-color="#B58A33"/>
+            </linearGradient>
+          </defs>
+          <rect x="16" y="16" width="208" height="208" rx="50" fill="url(#navTile)"/>
+          <rect x="16.5" y="16.5" width="207" height="207" rx="49.5" fill="none" stroke="#C9A24C" stroke-opacity="0.35" stroke-width="1.5"/>
+          <line x1="44" y1="62" x2="120" y2="62" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="2" stroke-linecap="round"/>
+          <text x="122" y="128" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-style="italic" font-weight="600" font-size="158" fill="url(#navGold)" text-anchor="middle" dominant-baseline="central">J</text>
+        </svg>
+      </span>
       <span>Jack's Detailing Co.</span>
     </a>
     <nav>
@@ -1527,7 +1543,25 @@ details.faq[open] .faq-icon svg { color: var(--ink); }
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="logo">
-          <span class="logo-mark">J</span>
+          <span class="logo-mark" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+              <defs>
+                <linearGradient id="footTile" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#1C1917"/>
+                  <stop offset="1" stop-color="#0C0A09"/>
+                </linearGradient>
+                <linearGradient id="footGold" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#EBD08A"/>
+                  <stop offset="0.5" stop-color="#C9A24C"/>
+                  <stop offset="1" stop-color="#B58A33"/>
+                </linearGradient>
+              </defs>
+              <rect x="16" y="16" width="208" height="208" rx="50" fill="url(#footTile)"/>
+              <rect x="16.5" y="16.5" width="207" height="207" rx="49.5" fill="none" stroke="#C9A24C" stroke-opacity="0.35" stroke-width="1.5"/>
+              <line x1="44" y1="62" x2="120" y2="62" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="2" stroke-linecap="round"/>
+              <text x="122" y="128" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-style="italic" font-weight="600" font-size="158" fill="url(#footGold)" text-anchor="middle" dominant-baseline="central">J</text>
+            </svg>
+          </span>
           <span>Jack's Detailing Co.</span>
         </a>
         <p>Premium hand-detailing for Atherton and the surrounding Bay Area. Open 7 days. Run by Jack Preston.</p>
