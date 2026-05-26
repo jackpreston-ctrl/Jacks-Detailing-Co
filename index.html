@@ -232,6 +232,18 @@ a { color: inherit; text-decoration: none; }
 .hero-visual::before {
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(60% 50% at 50% 35%, rgba(201,162,76,.18), transparent 60%);
+  z-index: 1; pointer-events: none;
+}
+.hero-photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.hero-visual::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(12,10,9,0) 55%, rgba(12,10,9,.55) 100%);
+  z-index: 2; pointer-events: none;
 }
 .hero-car-svg {
   position: absolute; left: 0; right: 0; bottom: 8%;
@@ -252,7 +264,7 @@ a { color: inherit; text-decoration: none; }
   100% { transform: translateX(30%) rotate(-6deg); opacity: 0; }
 }
 .hero-badge {
-  position: absolute; top: 20px; left: 20px;
+  position: absolute; top: 20px; left: 20px; z-index: 3;
   padding: 10px 14px; border-radius: 12px;
   background: rgba(12,10,9,.6); backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,.08);
@@ -261,7 +273,7 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px var(--gold); }
 .hero-stat-card {
-  position: absolute; right: 20px; bottom: 20px;
+  position: absolute; right: 20px; bottom: 20px; z-index: 3;
   background: rgba(250,250,249,.96); backdrop-filter: blur(10px);
   padding: 16px 20px; border-radius: var(--radius);
   box-shadow: var(--shadow-md);
@@ -458,9 +470,27 @@ section { padding: 100px 0; }
 .before-after .section-sub { color: rgba(245,245,244,.7); }
 
 .ba-wrap {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  display: grid; grid-template-columns: 1fr; gap: 24px;
   position: relative;
+  max-width: 920px; margin: 0 auto;
 }
+.ba-photo-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: #0C0A09;
+}
+.ba-photo-card img {
+  display: block; width: 100%; height: auto;
+}
+.ba-photo-caption {
+  margin-top: 18px;
+  text-align: center;
+  color: rgba(245,245,244,.78);
+  font-size: 0.95rem;
+}
+.ba-photo-caption strong { color: var(--gold); font-weight: 500; }
 .ba-card {
   position: relative; aspect-ratio: 4/3;
   border-radius: var(--radius-lg);
@@ -874,46 +904,9 @@ details.faq[open] .faq-icon svg { color: var(--ink); }
       </div>
     </div>
 
-    <div class="hero-visual" aria-hidden="true">
+    <div class="hero-visual">
+      <img class="hero-photo" src="photos/hero-porsche-foam.jpg" alt="Porsche 911 covered in pre-wash foam during a detail by Jack's Detailing Co."/>
       <div class="hero-badge"><span class="hero-badge-dot"></span> Now booking · 7 days a week</div>
-      <!-- Stylized car silhouette in SVG -->
-      <svg class="hero-car-svg" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="carBody" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#1a1a1a"/>
-            <stop offset="50%" stop-color="#0a0a0a"/>
-            <stop offset="100%" stop-color="#000"/>
-          </linearGradient>
-          <linearGradient id="carHighlight" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
-            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-          </linearGradient>
-          <radialGradient id="ground" cx="50%" cy="100%" r="60%">
-            <stop offset="0%" stop-color="rgba(201,162,76,0.18)"/>
-            <stop offset="100%" stop-color="rgba(201,162,76,0)"/>
-          </radialGradient>
-        </defs>
-        <ellipse cx="300" cy="220" rx="260" ry="14" fill="url(#ground)"/>
-        <!-- Car body silhouette -->
-        <path d="M 60 180 Q 80 110 180 100 L 240 70 Q 280 55 320 55 L 400 55 Q 450 60 480 100 L 540 110 Q 560 120 560 160 L 560 200 L 60 200 Z"
-              fill="url(#carBody)"/>
-        <!-- Window highlights -->
-        <path d="M 195 102 L 250 75 Q 285 62 320 62 L 395 62 Q 432 68 460 100 Z"
-              fill="rgba(201,162,76,0.18)" opacity="0.8"/>
-        <path d="M 200 105 L 252 82 Q 285 70 320 70 L 395 70 Q 425 76 450 100 Z"
-              fill="rgba(255,255,255,0.06)"/>
-        <!-- Body highlight -->
-        <path d="M 80 160 Q 100 140 280 138 L 480 140 Q 520 145 540 160" stroke="url(#carHighlight)" stroke-width="1.5" fill="none" opacity="0.6"/>
-        <!-- Wheels -->
-        <circle cx="160" cy="200" r="36" fill="#0a0a0a"/>
-        <circle cx="160" cy="200" r="26" fill="#1f1f1f"/>
-        <circle cx="160" cy="200" r="10" fill="#444" opacity="0.6"/>
-        <circle cx="460" cy="200" r="36" fill="#0a0a0a"/>
-        <circle cx="460" cy="200" r="26" fill="#1f1f1f"/>
-        <circle cx="460" cy="200" r="10" fill="#444" opacity="0.6"/>
-        <!-- Headlight -->
-        <ellipse cx="540" cy="135" rx="14" ry="6" fill="#F4E9CD" opacity="0.7"/>
-      </svg>
       <div class="hero-shine"></div>
       <div class="hero-stat-card">
         <div class="row">
@@ -1174,38 +1167,10 @@ details.faq[open] .faq-icon svg { color: var(--ink); }
     </div>
 
     <div class="ba-wrap">
-      <div class="ba-card ba-before" role="img" aria-label="Before detailing: dusty matte finish">
-        <span class="ba-label before">Before</span>
-        <div class="dirt"></div>
-        <svg class="car-svg" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 40 150 Q 60 90 150 80 L 200 55 Q 240 42 280 42 L 340 42 Q 380 48 410 80 L 460 90 Q 480 100 480 135 L 480 165 L 40 165 Z"
-                fill="#3F3F46" opacity="0.85"/>
-          <circle cx="130" cy="165" r="28" fill="#18181B"/>
-          <circle cx="400" cy="165" r="28" fill="#18181B"/>
-        </svg>
-        <div class="ba-caption">Two weeks of Bay Area dust, pollen and brake dust.</div>
+      <div class="ba-photo-card">
+        <img src="photos/before-after-sedan.jpg" alt="Before and after: a blue sedan caked in dust and road grime transformed to a clean, glossy finish by Jack's Detailing Co."/>
       </div>
-      <div class="ba-card ba-after" role="img" aria-label="After detailing: deep gloss finish">
-        <span class="ba-label after">After</span>
-        <svg class="car-svg" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="ba-gloss" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#1f1f1f"/>
-              <stop offset="60%" stop-color="#000"/>
-            </linearGradient>
-          </defs>
-          <path d="M 40 150 Q 60 90 150 80 L 200 55 Q 240 42 280 42 L 340 42 Q 380 48 410 80 L 460 90 Q 480 100 480 135 L 480 165 L 40 165 Z"
-                fill="url(#ba-gloss)"/>
-          <path d="M 150 78 L 200 58 Q 240 46 280 46 L 340 46 Q 378 52 408 80 Z" fill="rgba(201,162,76,.25)"/>
-          <path d="M 60 135 Q 100 122 250 122 L 460 124" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" fill="none"/>
-          <circle cx="130" cy="165" r="28" fill="#0a0a0a"/>
-          <circle cx="130" cy="165" r="18" fill="#222"/>
-          <circle cx="400" cy="165" r="28" fill="#0a0a0a"/>
-          <circle cx="400" cy="165" r="18" fill="#222"/>
-        </svg>
-        <div class="shine"></div>
-        <div class="ba-caption">Hand-washed, clay-barred, sealed. Reflective enough to shave in.</div>
-      </div>
+      <p class="ba-photo-caption">Weeks of Bay Area dust, pollen and brake dust — gone in a single visit. <strong>Hand-washed, clay-barred, sealed.</strong></p>
     </div>
 
     <div class="ba-cta">
